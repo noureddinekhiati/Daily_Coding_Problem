@@ -14,7 +14,7 @@ If using a language that has no pointers (such as Python), you can assume you ha
 struct Node 
 { 
 	int data; 
-	struct Node* npx; /* XOR of next and previous node */
+	struct Node* both; /* XOR of next and previous node */
 }; 
 
 struct Node* XOR (struct Node *a, struct Node *b) 
@@ -29,14 +29,14 @@ void add(struct Node **head, int data)
 	struct Node *new_node = (struct Node *) malloc (sizeof (struct Node) ); 
 	new_node->data = data; 
 
-	new_node->npx = XOR(*head, NULL); 
+	new_node->both = XOR(*head, NULL); 
 
 
 	if (*head!= NULL) 
 	{ 
 
-		struct Node* next = XOR((*head)->npx, NULL); 
-		(*head_ref)->npx = XOR(new_node, next); 
+		struct Node* next = XOR((*head)->both, NULL); 
+		(*head_ref)->both = XOR(new_node, next); 
 	} 
 
 	*head = new_node; 
@@ -53,7 +53,7 @@ Node* get (struct Node *head,int index)
 	while (i < index ) 
 	{ 
 		
-		next = XOR (prev, curr->npx);
+		next = XOR (prev, curr->both);
 		prev = curr; 
 		curr = next; 
 	} 
